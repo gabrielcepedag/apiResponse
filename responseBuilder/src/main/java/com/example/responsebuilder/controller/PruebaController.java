@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 @RestController
 @RequestMapping("/api/prueba")
 public class PruebaController {
@@ -19,12 +21,12 @@ public class PruebaController {
     }
 
     @RequestMapping(value = "/inyectar", method = RequestMethod.GET)
-    public ResponseEntity<ApiResponse> savePruebas(){
-        return pruebaService.savePruebas();
+    public ResponseEntity<ApiResponse> savePruebas(Locale locale){
+        return pruebaService.savePruebas(locale);
     }
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET)
-    public ResponseEntity<ApiResponse> findAll() {
-        return pruebaService.findAll();
+    public ResponseEntity<ApiResponse> findAll(Locale locale) {
+        return pruebaService.findAll(locale);
     }
 }
