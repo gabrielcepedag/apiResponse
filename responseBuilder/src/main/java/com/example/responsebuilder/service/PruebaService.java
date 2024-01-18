@@ -24,18 +24,34 @@ public class PruebaService {
     }
 
     public ResponseEntity<ApiResponse> findAll() {
-        List<Prueba> lista = pruebaRepository.findAll();
-        return responseBuilder.buildResponse(HttpStatus.OK.value(), lista);
+        ResponseEntity<ApiResponse> response;
+
+        try{
+            List<Prueba> lista = pruebaRepository.findAll();
+            response = responseBuilder.buildResponse(HttpStatus.OK.value(), lista);
+        }catch (Exception e){
+            response = responseBuilder.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error al cargar Base de Datos");
+        }
+
+        return response;
     }
 
     public ResponseEntity<ApiResponse> savePruebas() {
-        List<Prueba> pruebas = new ArrayList<>();
-        pruebas.add(new Prueba("Gabriel", 21));
-        pruebas.add(new Prueba("Enmannuel", 25));
-        pruebas.add(new Prueba("Marifer", 20));
-        pruebas.add(new Prueba("Wilson", 54));
-        pruebas.add(new Prueba("Soraya", 54));
-        List<Prueba> lista = pruebaRepository.saveAll(pruebas);
-        return responseBuilder.buildResponse(HttpStatus.OK.value(), lista, "Pruebas almacenadas correctamente!");
+        ResponseEntity<ApiResponse> response;
+
+        try{
+            List<Prueba> pruebas = new ArrayList<>();
+            pruebas.add(new Prueba("Gabriel", 21));
+            pruebas.add(new Prueba("Enmannuel", 25));
+            pruebas.add(new Prueba("Marifer", 20));
+            pruebas.add(new Prueba("Wilson", 54));
+            pruebas.add(new Prueba("Soraya", 54));
+            List<Prueba> lista = pruebaRepository.saveAll(pruebas);
+            response = responseBuilder.buildResponse(HttpStatus.OK.value(), lista, "Pruebas almacenadas correctamente!");
+        }catch (Exception e){
+            response = responseBuilder.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error al guardar las Pruebas!");
+        }
+
+        return response;
     }
 }
