@@ -43,12 +43,11 @@ public class ApiResponse<T> {
     public static class ApiResponseBuilder<T> {
         private boolean error;
         private final int code;
-        private final String message;
+        private String message;
         private T data;
         private String extra;
-        public ApiResponseBuilder(ApiResponseCode apiResponseCode){
-            this.code = apiResponseCode.getCode();
-            this.message = apiResponseCode.getMessage();
+        public ApiResponseBuilder(int code){
+            this.code = code;
             this.error = (code != ApiResponseCode.SUCCESS.getCode());
         }
         public ApiResponseBuilder<T> withData(T data) {
@@ -57,6 +56,10 @@ public class ApiResponse<T> {
         }
         public ApiResponseBuilder<T> withExtra(String extra) {
             this.extra = extra;
+            return this;
+        }
+        public ApiResponseBuilder<T> withMessage(String message) {
+            this.message = message;
             return this;
         }
         public ResponseEntity<ApiResponse> build() {

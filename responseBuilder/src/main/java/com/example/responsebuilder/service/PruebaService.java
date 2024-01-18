@@ -47,7 +47,7 @@ public class PruebaService {
             pruebas.add(new Prueba("Wilson", 54));
             pruebas.add(new Prueba("Soraya", 54));
             List<Prueba> lista = pruebaRepository.saveAll(pruebas);
-            response = responseBuilder.buildResponse(HttpStatus.OK.value(), lista, "Pruebas almacenadas correctamente!");
+            response = responseBuilder.buildResponse(HttpStatus.OK.value(), "Pruebas almacenadas correctamente!", lista);
         }catch (Exception e){
             response = responseBuilder.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error al guardar las Pruebas!");
         }
